@@ -4,23 +4,28 @@ import './App.css';
 import {useState, useEffect} from 'react';
 
 function App() {
-  const [data, setData] = useState({})
+  const [data, setData] = useState([])
 
   useEffect(
       () => {
-          fetch('https://jsonplaceholder.typicode.com/posts/4')
+          fetch('https://jsonplaceholder.typicode.com/posts')
               .then((response)=> {
+
                   return response.json()
               })
               .then((data) => {
                   setData(data)
               })
-      }
-      )
-    console.log(data)
+      }, [])
+console.log(data[0])
   return (
     <div className="App">
+         {
+             data.map((items, index) => {
+                return <p key={index}> {index <= 10 && items.title} </p>
 
+        } )
+         }
     </div>
   );
 }
